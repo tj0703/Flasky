@@ -17,6 +17,7 @@ class UserEndpointsTest(unittest.TestCase):
         }
 
     def generate_auth_token(self, username, password):
+        """returns authentication token and response from the endpoint"""
         auth = (username, password)
         r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
         response = json.loads(r.content)
@@ -27,6 +28,7 @@ class UserEndpointsTest(unittest.TestCase):
         return token, r.json()
 
     def test_existing_user_record(self):
+        # tests if the existing user record is retrievable
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -37,6 +39,7 @@ class UserEndpointsTest(unittest.TestCase):
         self.assertIn('retrieval succesful', response.get('message'))
 
     def check_user_data_after_update(self, username, password, attr, data):
+        """Checks if the user record is updated with new data"""
         auth_token = self.generate_auth_token(username, password)
         r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token))
         response = json.loads(r.content)
@@ -44,6 +47,7 @@ class UserEndpointsTest(unittest.TestCase):
         return r.status_code
 
     def test_non_existing_user_record(self):
+        # tests if the non existing user record is unavailable
         with open('./user2.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -54,6 +58,7 @@ class UserEndpointsTest(unittest.TestCase):
         self.assertIn('Token authentication required', response)
 
     def test_user_records_exists(self):
+        # tests if all the user records are stored in the database
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -64,6 +69,7 @@ class UserEndpointsTest(unittest.TestCase):
         self.assertIn(username, payload)
 
     def test_update_user_using_json_header(self):
+        # tests the update functionality of each allowed field
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -77,6 +83,7 @@ class UserEndpointsTest(unittest.TestCase):
         self.assertIn('Updated', response)
 
     def test_update_user_incorrect_field(self):
+        # tests the update functionality throws error when unavailable field is updated
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -91,6 +98,7 @@ class UserEndpointsTest(unittest.TestCase):
         self.assertIn('Field update not allowed', response)
 
     def test_update_user_using_text_header(self):
+        # tests the update functionality when data is sent in non json format
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -104,6 +112,7 @@ class UserEndpointsTest(unittest.TestCase):
         self.assertIn('Bad Request', response)
 
     def test_update_user_firstname(self):
+        # tests the first name update functionality
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
@@ -122,6 +131,7 @@ class UserEndpointsTest(unittest.TestCase):
 
 
     def test_update_user_phone(self):
+        # tests the phone update functionality
         with open('./user1.json') as f:
             data = json.load(f)
         username = data["username"]
