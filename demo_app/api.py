@@ -87,7 +87,7 @@ def put_specific_user(username, request):
     data = request.get_json()
     print(data)
     db = get_db()
-    for key, value in data.iteritems():
+    for key, value in data.items():
         if key not in allowed_fields:
             return jsonify({'status': 'FAILURE',
                             'message': 'Field update not allowed'}), 403
