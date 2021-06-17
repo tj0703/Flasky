@@ -1,6 +1,8 @@
 import requests
 import unittest
 import json
+import xmlrunner
+
 
 class UserEndpointsTest(unittest.TestCase):
 
@@ -137,4 +139,8 @@ class UserEndpointsTest(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    unittest.main(verbosity=2)
+    unittest.main(
+        testRunner=xmlrunner.XMLTestRunner(output='demo_app/test-reports'),
+        # these make sure that some options that are not applicable
+        # remain hidden from the help menu.
+        failfast=False, buffer=False, catchbreak=False)

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="test_api.UserEndpointsTest-20210617154145" tests="8" file="test_api.py" time="0.430" timestamp="2021-06-17T15:41:46" failures="0" errors="0" skipped="0">
+	<testcase classname="test_api.UserEndpointsTest" name="test_existing_user_record" time="0.090" timestamp="2021-06-17T15:41:45" file="test_api.py" line="29"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_non_existing_user_record" time="0.012" timestamp="2021-06-17T15:41:45" file="test_api.py" line="46"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_update_user_firstname" time="0.054" timestamp="2021-06-17T15:41:45" file="test_api.py" line="106"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_update_user_incorrect_field" time="0.049" timestamp="2021-06-17T15:41:45" file="test_api.py" line="79"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_update_user_phone" time="0.068" timestamp="2021-06-17T15:41:46" file="test_api.py" line="124"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_update_user_using_json_header" time="0.050" timestamp="2021-06-17T15:41:46" file="test_api.py" line="66"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_update_user_using_text_header" time="0.056" timestamp="2021-06-17T15:41:46" file="test_api.py" line="93"/>
+	<testcase classname="test_api.UserEndpointsTest" name="test_user_records_exists" time="0.050" timestamp="2021-06-17T15:41:46" file="test_api.py" line="56"/>
+</testsuite>
