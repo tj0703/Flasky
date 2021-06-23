@@ -1,0 +1,533 @@
+<?xml version="1.0" ?>
+<testsuite name="UserEndpointsTest-20210623152526" tests="8" time="0.109" failures="0" errors="8">
+	<testcase classname="UserEndpointsTest" name="test_existing_user_record" time="0.031">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f4ee4f0&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f4ee4f0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4ee4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 36, in test_existing_user_record
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4ee4f0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_non_existing_user_record" time="0.009">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f503040&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f503040>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f503040>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 55, in test_non_existing_user_record
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f503040>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_update_user_firstname" time="0.008">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f503a00&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f503a00>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f503a00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 120, in test_update_user_firstname
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f503a00>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_update_user_incorrect_field" time="0.017">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f51c9a0&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f51c9a0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f51c9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 91, in test_update_user_incorrect_field
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f51c9a0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_update_user_phone" time="0.009">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f4fc400&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f4fc400>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4fc400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 138, in test_update_user_phone
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4fc400>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_update_user_using_json_header" time="0.012">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f4fceb0&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f4fceb0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4fceb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 77, in test_update_user_using_json_header
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4fceb0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_update_user_using_text_header" time="0.009">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f4e55e0&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f4e55e0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4e55e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 106, in test_update_user_using_text_header
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4e55e0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<testcase classname="UserEndpointsTest" name="test_user_records_exists" time="0.014">
+		<error type="ConnectionError" message="HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('&lt;urllib3.connection.HTTPConnection object at 0x10f4e54c0&gt;: Failed to establish a new connection: [Errno 61] Connection refused'))"><![CDATA[Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 169, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 96, in create_connection
+    raise err
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/connection.py", line 86, in create_connection
+    sock.connect(sa)
+ConnectionRefusedError: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 699, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 394, in _make_request
+    conn.request(method, url, **httplib_request_kw)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 234, in request
+    super(HTTPConnection, self).request(method, url, body=body, headers=headers)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1253, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1299, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1248, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 1008, in _send_output
+    self.send(msg)
+  File "/usr/local/Cellar/python@3.9/3.9.5/Frameworks/Python.framework/Versions/3.9/lib/python3.9/http/client.py", line 948, in send
+    self.connect()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 200, in connect
+    conn = self._new_conn()
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connection.py", line 181, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPConnection object at 0x10f4e54c0>: Failed to establish a new connection: [Errno 61] Connection refused
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 439, in send
+    resp = conn.urlopen(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/connectionpool.py", line 755, in urlopen
+    retries = retries.increment(
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/urllib3/util/retry.py", line 574, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4e54c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 66, in test_user_records_exists
+    auth_token, status_message = self.generate_auth_token(username, password)
+  File "/Users/Tanvi/Flasky/demo_app/test_api.py", line 22, in generate_auth_token
+    r = requests.get('http://0.0.0.0:8080/api/auth/token', auth=auth)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 76, in get
+    return request('get', url, params=params, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/api.py", line 61, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 542, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/sessions.py", line 655, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/Tanvi/.virtualenvs/Flasky/lib/python3.9/site-packages/requests/adapters.py", line 516, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPConnectionPool(host='0.0.0.0', port=8080): Max retries exceeded with url: /api/auth/token (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x10f4e54c0>: Failed to establish a new connection: [Errno 61] Connection refused'))
+]]></error>
+	</testcase>
+	<system-out><![CDATA[]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -7,14 +7,11 @@ import xmlrunner
 class UserEndpointsTest(unittest.TestCase):
 
     def get_api_headers(self, token):
-        return {
-            'Token': token, 'Content-Type': 'application/json'
-        }
+        return {'Token': token, 'Content-Type': 'application/json'}
 
     def get_api_headers_not_json(self, token):
-        return {
-            'Token': token, 'Content-Type': 'application/text'
-        }
+        return {'Token': token, 'Content-Type': 'application/text'}
+
 
     def generate_auth_token(self, username, password):
         """returns authentication token and response from the endpoint"""
@@ -25,7 +22,7 @@ class UserEndpointsTest(unittest.TestCase):
             return None, r.json()
         res = r.json()
         token = res.get('token')
-        return token, r.json()
+        return token
 
     def test_existing_user_record(self):
         # tests if the existing user record is retrievable
@@ -33,15 +30,15 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
-        r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token))
+        auth_token = str(self.generate_auth_token(username, password))
+        r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'})
         response = json.loads(r.content)
         self.assertIn('retrieval succesful', response.get('message'))
 
     def check_user_data_after_update(self, username, password, attr, data):
         """Checks if the user record is updated with new data"""
-        auth_token = self.generate_auth_token(username, password)
-        r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token))
+        auth_token = str(self.generate_auth_token(username, password))
+        r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'})
         response = json.loads(r.content)
         self.assertIn(data, response.get('payload').get(attr))
         return r.status_code
@@ -52,10 +49,10 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
-        r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token))
+        auth_token = str(self.generate_auth_token(username, password))
+        r = requests.get(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'})
         response = r.json().get('message')
-        self.assertIn('Token authentication required', response)
+        self.assertIn('Invalid Token', response)
 
     def test_user_records_exists(self):
         # tests if all the user records are stored in the database
@@ -63,8 +60,8 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
-        r = requests.get('http://0.0.0.0:8080/api/users', headers=self.get_api_headers(auth_token))
+        auth_token = str(self.generate_auth_token(username, password))
+        r = requests.get('http://0.0.0.0:8080/api/users', headers={'Token': auth_token, 'Content-Type': 'application/json'})
         payload = r.json().get('payload')
         self.assertIn(username, payload)
 
@@ -74,10 +71,10 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
+        auth_token = str(self.generate_auth_token(username, password))
         with open('./updatedata.json') as f:
             params = json.load(f)
-        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token),
+        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'},
                          data=json.dumps(params))
         response = r.json().get('message')
         self.assertIn('Updated', response)
@@ -88,11 +85,11 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
+        auth_token= str(self.generate_auth_token(username, password))
         attr = "password"
         update_data = "abcd1234"
         params = {attr: update_data}
-        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token),
+        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'},
                          data=json.dumps(params))
         response = r.json().get('message')
         self.assertIn('Field update not allowed', response)
@@ -103,7 +100,7 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
+        auth_token= str(self.generate_auth_token(username, password))
         with open('./updatedata.json') as f:
             params = json.load(f)
         r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers_not_json(auth_token),
@@ -117,17 +114,17 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
+        auth_token = str(self.generate_auth_token(username, password))
 
         attr = "firstname"
         with open('./updatedata.json') as f:
             data = json.load(f)
         update_data = data["firstname"]
         params = {attr: update_data}
-        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token),
+        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'},
                              data=json.dumps(params))
-        if r.status_code == 200:
-            self.asserEqual(200, self.check_user_data_after_update(username, password, attr, update_data))
+        self.assertEqual(201, r.status_code)
+        self.assertEqual(200, self.check_user_data_after_update(username, password, attr, update_data))
 
 
     def test_update_user_phone(self):
@@ -136,16 +133,16 @@ class UserEndpointsTest(unittest.TestCase):
             data = json.load(f)
         username = data["username"]
         password = data["password"]
-        auth_token, status_message = self.generate_auth_token(username, password)
+        auth_token = str(self.generate_auth_token(username, password))
         attr = "phone"
         with open('./updatedata.json') as f:
             data = json.load(f)
         update_data = data["phone"]
         params = {attr: update_data}
-        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers=self.get_api_headers(auth_token),
+        r = requests.put(f'http://0.0.0.0:8080/api/users/{username}', headers={'Token': auth_token, 'Content-Type': 'application/json'},
                              data=json.dumps(params))
-        if r.status_code == 200:
-            self.asserEqual(200, self.check_user_data_after_update(username, password, attr, update_data))
+        self.assertEqual(201, r.status_code)
+        self.assertEqual(200, self.check_user_data_after_update(username, password, attr, update_data))
 
 
 if __name__ == '__main__':
@@ -154,3 +151,4 @@ if __name__ == '__main__':
         # these make sure that some options that are not applicable
         # remain hidden from the help menu.
         failfast=False, buffer=False, catchbreak=False)
+    # unittest.main()

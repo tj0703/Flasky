@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<testsuite name="UserEndpointsTest-20210623161142" tests="8" time="0.448" failures="0" errors="0">
+	<testcase classname="UserEndpointsTest" name="test_existing_user_record" time="0.050"/>
+	<testcase classname="UserEndpointsTest" name="test_non_existing_user_record" time="0.008"/>
+	<testcase classname="UserEndpointsTest" name="test_update_user_firstname" time="0.107"/>
+	<testcase classname="UserEndpointsTest" name="test_update_user_incorrect_field" time="0.044"/>
+	<testcase classname="UserEndpointsTest" name="test_update_user_phone" time="0.108"/>
+	<testcase classname="UserEndpointsTest" name="test_update_user_using_json_header" time="0.041"/>
+	<testcase classname="UserEndpointsTest" name="test_update_user_using_text_header" time="0.043"/>
+	<testcase classname="UserEndpointsTest" name="test_user_records_exists" time="0.048"/>
+	<system-out><![CDATA[]]></system-out>
+	<system-err><![CDATA[]]></system-err>
+</testsuite>
